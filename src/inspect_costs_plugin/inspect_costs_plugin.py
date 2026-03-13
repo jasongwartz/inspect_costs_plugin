@@ -29,17 +29,21 @@ class ModelCostHooks(Hooks):
                 response.raise_for_status()
         except httpx.HTTPStatusError as e:
             logger.warning(
-                f"Failed to fetch model costs (HTTP {e.response.status_code}): {e}"
+                f"Failed to fetch model costs for model '{data.spec.model}' (HTTP {e.response.status_code}): {e}"
             )
             return
         except httpx.HTTPError as e:
-            logger.warning(f"Failed to fetch model costs: {e}")
+            logger.warning(
+                f"Failed to fetch model costs for model '{data.spec.model}': {e}"
+            )
             return
 
         try:
             prices = adapter.validate_python(response.json())
         except ValidationError as e:
-            logger.warning(f"Failed to parse model cost response: {e}")
+            logger.warning(
+                f"Failed to parse model cost response for model '{data.spec.model}': {e}"
+            )
             return
 
         for model_name, cost in prices.items():
