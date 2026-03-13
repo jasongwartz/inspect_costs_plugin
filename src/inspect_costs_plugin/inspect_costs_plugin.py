@@ -12,10 +12,13 @@ adapter = TypeAdapter(dict[str, ModelCost])
 )
 class ModelCostHooks(Hooks):
     async def on_task_start(self, data: TaskStart) -> None:
-        costs = httpx.get(
-            "https://llm-prices.llm-prices.workers.dev/api/inspect-costs",
-            params={"model": data.spec.model, "format": "json"},
-        ).json()
+        async with httpx.AsyncClient() as client:
+            costs = (
+                await client.get(
+                    "https://llm-prices.llm-prices.workers.dev/api/inspect-costs",
+                    params={"model": data.spec.model, "format": "json"},
+                )
+            ).json()
         prices = adapter.validate_python(costs)
         for model_name, cost in prices.items():
             set_model_cost(model_name, cost)

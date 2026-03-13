@@ -1,4 +1,4 @@
-from unittest.mock import patch, MagicMock
+from unittest.mock import AsyncMock, MagicMock, patch
 
 from inspect_ai import Task, eval, task
 from inspect_ai.dataset import Sample
@@ -35,9 +35,14 @@ def test_eval_has_cost_data():
         }
     }
 
+    mock_client = AsyncMock()
+    mock_client.get.return_value = mock_response
+    mock_client.__aenter__ = AsyncMock(return_value=mock_client)
+    mock_client.__aexit__ = AsyncMock(return_value=False)
+
     with patch(
-        "inspect_costs_plugin.inspect_costs_plugin.httpx.get",
-        return_value=mock_response,
+        "inspect_costs_plugin.inspect_costs_plugin.httpx.AsyncClient",
+        return_value=mock_client,
     ):
         logs = eval(
             hello_world(), model="mockllm/model", log_dir="/tmp/inspect-costs-test"
