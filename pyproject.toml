@@ -1,0 +1,20 @@
+[project]
+name = "inspect-costs-plugin"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "httpx>=0.28.1",
+]
+
+[dependency-groups]
+dev = [
+    "inspect-ai>=0.3.192",
+    "openai>=2.26.0",
+    "pytest>=9.0.2",
+]
+
+[project.entry-points.inspect_ai]
+inspect_costs_plugin = "inspect_costs_plugin._registry"
+
