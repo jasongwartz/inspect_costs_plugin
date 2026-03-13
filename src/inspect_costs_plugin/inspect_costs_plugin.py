@@ -14,7 +14,12 @@ adapter = TypeAdapter(dict[str, ModelCost])
     name="model_cost_hooks", description="Automatically retrieve and set model costs"
 )
 class ModelCostHooks(Hooks):
+    def __init__(self) -> None:
+        self.models_already_loaded: set[str] = set()
+
     async def on_task_start(self, data: TaskStart) -> None:
+        if data.spec.model in self.models_already_loaded:
+            return
         try:
             async with httpx.AsyncClient(timeout=10) as client:
                 response = await client.get(
@@ -39,3 +44,4 @@ class ModelCostHooks(Hooks):
 
         for model_name, cost in prices.items():
             set_model_cost(model_name, cost)
+            self.models_already_loaded.add(model_name)
