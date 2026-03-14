@@ -1,4 +1,5 @@
 import logging
+import os
 
 from inspect_ai.hooks import Hooks, TaskStart, hooks
 from inspect_ai.model import set_model_cost, ModelCost
@@ -7,6 +8,7 @@ from pydantic import TypeAdapter, ValidationError
 
 logger = logging.getLogger(__name__)
 
+DEFAULT_API_URL = "https://llm-prices.llm-prices.workers.dev/api/inspect-costs"
 adapter = TypeAdapter(dict[str, ModelCost])
 
 
@@ -22,8 +24,9 @@ class ModelCostHooks(Hooks):
             return
         try:
             async with httpx.AsyncClient(timeout=10) as client:
+                api_url = os.environ.get("INSPECT_COSTS_API_URL", DEFAULT_API_URL)
                 response = await client.get(
-                    "https://llm-prices.llm-prices.workers.dev/api/inspect-costs",
+                    api_url,
                     params={"model": data.spec.model, "format": "json"},
                 )
                 response.raise_for_status()

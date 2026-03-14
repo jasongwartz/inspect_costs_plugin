@@ -1,21 +1,35 @@
 # Inspect Costs Plugin
 
-This package implements [an Inspect AI "hook"](https://inspect.aisi.org.uk/extensions.html#hooks) to auto-gather LLM cost data from https://llm-prices.llm-prices.workers.dev/ for models being used in an [Inspect eval](https://inspect.aisi.org.uk/).
+An [Inspect AI hook](https://inspect.aisi.org.uk/extensions.html#hooks) that automatically retrieves and sets LLM cost data for models used in [Inspect evals](https://inspect.aisi.org.uk/). Pricing data is fetched from https://llm-prices.llm-prices.workers.dev/ by [Matt Fisher](https://github.com/MattFisher/llm-prices).
 
-## Usage
+## Installation
 
-Just install the package in your Python virtual environment, for example [with uv](https://docs.astral.sh/uv/concepts/projects/dependencies/#git):
+Install the package in your Python virtual environment:
 
 ```bash
+# with uv
 uv add git+https://github.com/jasongwartz/inspect-costs-plugin
+
+# with pip
+pip install git+https://github.com/jasongwartz/inspect-costs-plugin
 ```
 
-Inspect will then auto-detect the package and collect cost data for models you use in evals.
+That's it — Inspect will auto-detect the plugin and populate cost data for your eval runs. No code changes required.
 
-## Roadmap
+## Configuration
 
-- Load data for other models like scorer models
+| Environment variable    | Description                                               | Default                                                       |
+| ----------------------- | --------------------------------------------------------- | ------------------------------------------------------------- |
+| `INSPECT_COSTS_API_URL` | Override the pricing API endpoint (e.g. for self-hosting) | `https://llm-prices.llm-prices.workers.dev/api/inspect-costs` |
+
+## Limitations
+
+- Only the main task model gets cost data. Other models used during an eval (e.g. scorer models) are not currently covered.
 
 ## Credit
 
-Thanks to Matt Fisher [for the server implementation](https://github.com/MattFisher/llm-prices) that provides the LLM pricing data in an easy-to-consume format.
+Thanks to Matt Fisher for the [llm-prices](https://github.com/MattFisher/llm-prices) server that provides the pricing data.
+
+## License
+
+[MIT](LICENSE)
