@@ -8,10 +8,10 @@ Install the package in your Python virtual environment:
 
 ```bash
 # with uv
-uv add git+https://github.com/jasongwartz/inspect-costs-plugin
+uv add git+https://github.com/jasongwartz/inspect_costs_plugin
 
 # with pip
-pip install git+https://github.com/jasongwartz/inspect-costs-plugin
+pip install git+https://github.com/jasongwartz/inspect_costs_plugin
 ```
 
 That's it — Inspect will auto-detect the plugin and populate cost data for your eval runs. No code changes required.

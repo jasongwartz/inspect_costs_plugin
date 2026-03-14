@@ -1,5 +1,5 @@
 [project]
-name = "inspect-costs-plugin"
+name = "inspect_costs_plugin"
 version = "0.1.0"
 description = "Inspect AI hook plugin that automatically retrieves and sets LLM cost data for evals"
 license = "MIT"
