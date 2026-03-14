@@ -18,6 +18,10 @@ dev = [
     "ruff>=0.15.6",
 ]
 
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project.entry-points.inspect_ai]
 inspect_costs_plugin = "inspect_costs_plugin._registry"
 
