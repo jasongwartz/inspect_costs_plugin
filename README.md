@@ -14,7 +14,6 @@ Inspect will then auto-detect the package and collect cost data for models you u
 
 ## Roadmap
 
-- Cache cost data for models that have already been loaded
 - Load data for other models like scorer models
 
 ## Credit

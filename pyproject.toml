@@ -1,9 +1,10 @@
 [project]
 name = "inspect-costs-plugin"
 version = "0.1.0"
-description = "Add your description here"
+description = "Inspect AI hook plugin that automatically retrieves and sets LLM cost data for evals"
+license = "MIT"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.10"
 dependencies = [
     "httpx>=0.28.1",
 ]

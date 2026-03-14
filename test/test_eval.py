@@ -53,14 +53,16 @@ def _run_eval_with_mock_client(mock_client):
 def test_eval_has_cost_data():
     _custom_models["mockllm/model"] = ModelInfo(organization="Mock", model="model")
 
-    response = _make_success_response({
-        "mockllm/model": {
-            "input": 1.0,
-            "output": 2.0,
-            "input_cache_write": 0.5,
-            "input_cache_read": 0.1,
+    response = _make_success_response(
+        {
+            "mockllm/model": {
+                "input": 1.0,
+                "output": 2.0,
+                "input_cache_write": 0.5,
+                "input_cache_read": 0.1,
+            }
         }
-    })
+    )
     mock_client = _make_mock_client(response)
     logs = _run_eval_with_mock_client(mock_client)
 

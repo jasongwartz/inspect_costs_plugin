@@ -32,14 +32,16 @@ def test_caching_skips_duplicate_fetches():
     """Second call for the same model should not make another HTTP request."""
     _custom_models["mockllm/model"] = ModelInfo(organization="Mock", model="model")
 
-    response = _make_success_response({
-        "mockllm/model": {
-            "input": 1.0,
-            "output": 2.0,
-            "input_cache_write": 0.5,
-            "input_cache_read": 0.1,
+    response = _make_success_response(
+        {
+            "mockllm/model": {
+                "input": 1.0,
+                "output": 2.0,
+                "input_cache_write": 0.5,
+                "input_cache_read": 0.1,
+            }
         }
-    })
+    )
     mock_client = _make_mock_client(response)
 
     hooks = ModelCostHooks()
@@ -60,14 +62,16 @@ def test_caching_fetches_different_models_separately():
     _custom_models["mockllm/model"] = ModelInfo(organization="Mock", model="model")
     _custom_models["mockllm/other"] = ModelInfo(organization="Mock", model="other")
 
-    response = _make_success_response({
-        "mockllm/model": {
-            "input": 1.0,
-            "output": 2.0,
-            "input_cache_write": 0.5,
-            "input_cache_read": 0.1,
+    response = _make_success_response(
+        {
+            "mockllm/model": {
+                "input": 1.0,
+                "output": 2.0,
+                "input_cache_write": 0.5,
+                "input_cache_read": 0.1,
+            }
         }
-    })
+    )
     mock_client = _make_mock_client(response)
 
     hooks = ModelCostHooks()
