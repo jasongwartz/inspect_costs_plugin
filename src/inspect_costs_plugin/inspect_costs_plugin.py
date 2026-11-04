@@ -8,7 +8,7 @@ from pydantic import TypeAdapter, ValidationError
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_API_URL = "https://llm-prices.llm-prices.workers.dev/api/inspect-costs"
+DEFAULT_API_URL = "https://llm-prices.generality.org/api/inspect-costs"
 adapter = TypeAdapter(dict[str, ModelCost])
 
 
@@ -23,7 +23,7 @@ class ModelCostHooks(Hooks):
         if data.spec.model in self.models_already_loaded:
             return
         try:
-            async with httpx.AsyncClient(timeout=10) as client:
+            async with httpx.AsyncClient(timeout=10, follow_redirects=True) as client:
                 api_url = os.environ.get("INSPECT_COSTS_API_URL", DEFAULT_API_URL)
                 response = await client.get(
                     api_url,

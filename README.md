@@ -1,6 +1,6 @@
 # Inspect Costs Plugin
 
-An [Inspect AI hook](https://inspect.aisi.org.uk/extensions.html#hooks) that automatically retrieves and sets LLM cost data for models used in [Inspect evals](https://inspect.aisi.org.uk/). Pricing data is fetched from https://llm-prices.llm-prices.workers.dev/ by [Matt Fisher](https://github.com/MattFisher/llm-prices).
+An [Inspect AI hook](https://inspect.aisi.org.uk/extensions.html#hooks) that automatically retrieves and sets LLM cost data for models used in [Inspect evals](https://inspect.aisi.org.uk/). Pricing data is fetched from https://llm-prices.generality.org/ by [Matt Fisher](https://github.com/Generality-Labs/llm-prices).
 
 ## Installation
 
@@ -20,7 +20,7 @@ That's it — Inspect will auto-detect the plugin and populate cost data for you
 
 | Environment variable    | Description                                               | Default                                                       |
 | ----------------------- | --------------------------------------------------------- | ------------------------------------------------------------- |
-| `INSPECT_COSTS_API_URL` | Override the pricing API endpoint (e.g. for self-hosting) | `https://llm-prices.llm-prices.workers.dev/api/inspect-costs` |
+| `INSPECT_COSTS_API_URL` | Override the pricing API endpoint (e.g. for self-hosting) | `https://llm-prices.generality.org/api/inspect-costs` |
 
 ## Limitations
 
@@ -28,7 +28,7 @@ That's it — Inspect will auto-detect the plugin and populate cost data for you
 
 ## Credit
 
-Thanks to Matt Fisher for the [llm-prices](https://github.com/MattFisher/llm-prices) server that provides the pricing data.
+Thanks to Matt Fisher for the [llm-prices](https://github.com/Generality-Labs/llm-prices) server that provides the pricing data.
 
 ## License
 
